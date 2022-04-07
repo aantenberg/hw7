@@ -5,38 +5,44 @@ const User = require('../models/User')
 
 const router = express.Router()
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res, next) => {
   const { body } = req
   const { username, password } = body
   try {
     await User.create({ username, password })
     res.send('user creation was successful')
+    next()
   } catch (e) {
-    res.send('user creation had a problem')
+    next(e)
   }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
   const { body } = req
   const { username, password } = body
   try {
     const user = await User.findOne({ username, password })
-    const { username: newUsername, password: newPassword } = user
-    req.session.username = newUsername
-    req.session.password = newPassword
-    res.send(`logged in as ${req.session.username}`)
+    if (user === null) {
+      throw Error('no user')
+    } else {
+      const { username: newUsername, password: newPassword } = user
+      req.session.username = newUsername
+      req.session.password = newPassword
+      res.send(`logged in as ${req.session.username}`)
+      next()
+    }
   } catch (e) {
-    res.send('username or password is incorrect')
+    next(e)
   }
 })
 
-router.post('/logout', isAuthenticated, async (req, res) => {
+router.post('/logout', isAuthenticated, async (req, res, next) => {
   try {
     req.session.username = undefined
-    req.session.password = ''
     res.send('logged out')
+    next()
   } catch (e) {
-    res.send('not logged in!')
+    next(e)
   }
 })
 
