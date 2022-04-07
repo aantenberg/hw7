@@ -1,0 +1,23 @@
+#card {
+  margin: 1rem auto;
+  border-collapse: separate; 
+  border-radius: 8px !important;
+  padding: 20px;
+  width: 50%;
+  box-shadow: rgb(0 0 0 / 30%) 0px 1px 18px;
+}
+
+.grey-border {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 10px;
+  border: 1px solid #CCCCCC;
+  border-radius: 10px
+}
+
+.link {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+
