@@ -24,7 +24,7 @@ const LoginPage = () => {
       <h1>Log In</h1>
       <input className="grey-border" placeholder="Username" onChange={e => setUsername(e.target.value)} />
       <input type="password" className="grey-border" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-      <button type="button" className="btn btn-primary" onClick={() => login()}>Log In</button>
+      <button type="button" className="btn purple-btn fullwidth" onClick={() => login()}>Log In</button>
       <br />
       <br />
       <p className="link">Don&apos;t have an account?&nbsp;</p>

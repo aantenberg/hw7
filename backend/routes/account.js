@@ -10,6 +10,7 @@ router.post('/signup', async (req, res, next) => {
   const { username, password } = body
   try {
     await User.create({ username, password })
+    req.session.username = username
     res.send('user creation was successful')
     next()
   } catch (e) {
@@ -23,11 +24,10 @@ router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({ username, password })
     if (user === null) {
-      throw Error('no user')
+      next(new Error('no user'))
     } else {
-      const { username: newUsername, password: newPassword } = user
+      const { username: newUsername } = user
       req.session.username = newUsername
-      req.session.password = newPassword
       res.send(`logged in as ${req.session.username}`)
       next()
     }
@@ -44,6 +44,10 @@ router.post('/logout', isAuthenticated, async (req, res, next) => {
   } catch (e) {
     next(e)
   }
+})
+
+router.get('/username', async (req, res) => {
+  res.json({ name: req.session.username })
 })
 
 module.exports = router

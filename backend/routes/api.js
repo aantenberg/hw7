@@ -11,7 +11,6 @@ router.get('', async (req, res, next) => {
   try {
     const questions = await Question.find()
     res.json(questions)
-    next()
   } catch (e) {
     next(e)
   }
@@ -37,6 +36,14 @@ router.post('/answer', isAuthenticated, async (req, res, next) => {
     next()
   } catch (e) {
     next(e)
+  }
+})
+
+router.get('/isloggedin', async (req, res) => {
+  if (req.session.username !== undefined) {
+    res.json({ loggedIn: true })
+  } else {
+    res.json({ loggedIn: false })
   }
 })
 

@@ -15,7 +15,7 @@ const SignupPage = () => {
       navigate('/')
     } catch (e) {
       // eslint-disable-next-line no-alert
-      alert('Failed to sign in')
+      alert('Failed to sign up')
     }
   }
 
@@ -24,7 +24,7 @@ const SignupPage = () => {
       <h1>Sign Up</h1>
       <input className="grey-border" placeholder="Username" onChange={e => setUsername(e.target.value)} />
       <input type="password" className="grey-border" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-      <button type="button" className="btn btn-primary" onClick={() => signup()}>Sign Up</button>
+      <button type="button" className="btn purple-btn fullwidth" onClick={() => signup()}>Sign Up</button>
       <br />
       <br />
       <p className="link">Already have an account? Click&nbsp;</p>

@@ -4,10 +4,11 @@ import {
 } from 'react-router-dom'
 import LoginPage from './LoginPage'
 import SignupPage from './SignupPage'
+import HomePage from './HomePage'
 
 const App = () => (
   <Routes>
-    <Route path="/" element={<h1>Home</h1>} />
+    <Route path="/" element={<HomePage />} />
     <Route path="/signup" element={<SignupPage />} />
     <Route path="/login" element={<LoginPage />} />
     {/* <Route path="about" element={<About />} />
